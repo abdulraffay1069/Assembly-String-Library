@@ -36,24 +36,37 @@ The following functions are implemented:
 
 ---
 
-## ▶️ How to Build
+## ⚠️ Requirements
 
-(Example using MASM)
+This project uses the **Irvine32 library** for input/output operations.
 
-```id="asmcmd1"
-ml /c filename.asm
-```
+To run this project, you need:
 
-Link if needed:
+* MASM assembler
+* Irvine32 library installed
 
-```id="asmcmd2"
-link filename.obj
+📌 Download Irvine32 from:
+https://asmirvine.com/gettingStartedVS2019/
+
+---
+
+## ▶️ How to Run
+
+1. Set up MASM + Irvine32
+2. Place all `.asm` files in the same project directory
+3. Assemble and link:
+
+```bash
+ml /c /coff main.asm
+link /subsystem:console main.obj Irvine32.lib
 ```
 
 ---
 
-## ⚠️ Notes
+## ℹ️ Note
 
+* Irvine32 is used only for input/output
+* All string operations are implemented manually in assembly
 * These implementations are for learning purposes
 * They mimic behavior of standard C string functions
 * No built-in library functions are used
