@@ -1,87 +1,123 @@
 # ⚙️ x86 Assembly String Library
 
-A small project where I reimplemented common C string functions using x86 Assembly to better understand how strings are handled at a low level.
+This project is a low-level implementation of common C string functions using x86 Assembly.
+The goal was simple: stop relying on high-level abstractions and understand how strings actually behave in memory.
 
 ---
 
-## 📌 What this project includes
+## 📌 What’s Implemented
 
-The following functions are implemented:
+The following string operations are written from scratch:
 
-* `strlen` – calculate string length
-* `strcpy` – copy one string into another
-* `strcmp` – compare two strings
-* `strcat` – append one string to another
-* `strchr` – find a character in a string
-* `strncmp` – compare first N characters
-* `strncpy` – copy N characters
-* `strncat` – append N characters
+* `strlen` – calculates length of a string
+* `strcpy` – copies one string into another
+* `strcmp` – compares two strings
+* `strcat` – concatenates strings
+* `strchr` – searches for a character
+* `strncmp` – compares first N characters
+* `strncpy` – copies N characters
+* `strncat` – appends N characters
 
----
-
-## 🧠 What I learned
-
-* Working with registers like `ESI`, `EDI`, `EAX`, `ECX`
-* Manual memory traversal using pointers
-* Handling null-terminated strings
-* Looping and branching using assembly instructions
-* Understanding how high-level string functions actually work internally
+No built-in string libraries are used.
 
 ---
 
-## ⚙️ Tools Used
+## 🔬 How It Works
+
+Each function operates directly on memory using registers and pointer movement.
+
+* `ESI` → used as source pointer
+* `EDI` → used as destination pointer
+* `EAX`, `ECX` → used for operations and counters
+
+Example logic:
+
+* **strlen**
+
+  * Traverse memory byte-by-byte
+  * Stop when `null terminator (0)` is found
+
+* **strcpy**
+
+  * Copy each byte from source to destination
+  * Continue until `0` is encountered
+
+* **strcmp**
+
+  * Compare characters one by one
+  * Return difference based on ASCII values
+
+This approach avoids any abstraction and works directly with raw memory.
+
+---
+
+## ⚙️ Low-Level Concepts Practiced
+
+* Manual memory traversal
+* Pointer-based string handling
+* Register-level data movement
+* Loop control using jumps
+* Null-terminated string structure
+* Function-like modular design in assembly
+
+---
+
+## 🛠️ Tools & Environment
 
 * x86 Assembly (MASM syntax)
-* Windows environment
+* Windows
+* Irvine32 library (for I/O only)
 
 ---
 
 ## ⚠️ Requirements
 
-This project uses the **Irvine32 library** for input/output operations.
-
-To run this project, you need:
+To run this project:
 
 * MASM assembler
-* Irvine32 library installed
+* Irvine32 library
 
-📌 Download Irvine32 from:
+📌 Irvine32 setup:
 https://asmirvine.com/gettingStartedVS2019/
 
 ---
 
 ## ▶️ How to Run
 
-1. Set up MASM + Irvine32
-2. Place all `.asm` files in the same project directory
-3. Assemble and link:
+1. Place all `.asm` files in one directory
+2. Assemble and link:
 
-```bash
+```
 ml /c /coff main.asm
 link /subsystem:console main.obj Irvine32.lib
 ```
 
 ---
 
-## ℹ️ Note
+## 📸 Example Output
 
-* Irvine32 is used only for input/output
-* All string operations are implemented manually in assembly
-* These implementations are for learning purposes
-* They mimic behavior of standard C string functions
-* No built-in library functions are used
+```
+Length: 5
+Copied String: Hello
+Comparison Result: -1
+```
+
+*(Irvine32 is used only to display output — all logic is implemented manually.)*
 
 ---
 
-## 🎯 Purpose
+## 🎯 Why This Project
 
-This project was created to move beyond high-level programming and understand how basic operations like string handling work at the machine level.
+High-level languages hide a lot of details.
+This project was built to understand:
+
+* how strings are stored in memory
+* how basic operations actually execute
+* how low-level logic replaces standard libraries
 
 ---
 
 ## 👨‍💻 Author
 
 Abdul Raffay Raja
-Computer Science Student exploring systems and low-level programming
-
----
+Computer Science student exploring low-level systems and cybersecurity
